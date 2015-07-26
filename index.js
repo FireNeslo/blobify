@@ -14,6 +14,6 @@ module.exports = function blobify(file, options) {
       callback()
     }))
   }
-  bundle = browserify(file).bundle()
+  bundle = browserify(file, options).bundle()
   return (stream = through(onBuffer))
 }
