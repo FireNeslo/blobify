@@ -1,11 +1,9 @@
 {
   "name": "blobify",
   "version": "1.0.0",
-  "description": "",
+  "description": "A Browserify transform to bundle a file as a blob.",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "files": ["index.js"],
   "author": "Øystein Ø. Olsen <fireneslo@gmail.com>",
   "license": "ISC",
   "dependencies": {
