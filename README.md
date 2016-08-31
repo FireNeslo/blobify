@@ -12,15 +12,17 @@ $ npm install FireNeslo/blobify --save-dev
 
 ### CLI
 ```bash
-$ browserify file.blob -t blobify --outfile blobified.js
+browserify index.js -t [ blobify blob1 blob2 ] > bundle.js
 ```
 ### Node
 ```js
-var fs = require("fs");
-var browserify = require("browserify");
-var blobify = require("blobify");
+const browserify = require('browserify');
+const blobify = require('blobify');
+const fs = require('fs');
 
-browserify("./file.blob")
-  .transform(blobify).bundle()
-  .pipe(fs.createWriteStream("blobified.js"));
+browserify(__dirname + '/index.js')
+.transform(blobify, {_: ['blob1', 'blob2']})
+.bundle()
+  .on('error', console.error)
+  .pipe(fs.createWriteStream('bundle.js')
 ```

@@ -2,9 +2,10 @@
 
 const through = require('through2');
 
-module.exports = function blobify (file, options) {
-  if (file.slice(-5) !== '.blob') return through();
-  options = options || {};
+module.exports = function blobify (file, opt) {
+  opt = opt || {};
+  const match = (entry) => file.slice(-entry.length) === entry
+  if (!opt._.some(match)) return through()
 
   return through.obj((data, encoding, cb) => {
     const content = data.toString('base64');

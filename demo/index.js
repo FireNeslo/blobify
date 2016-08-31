@@ -1,5 +1,4 @@
 'use strict'
 
-const blob = require('./.blob')
-
-console.log('blob is', blob.toString())
+console.log('blob 1', require('./blob1'))
+console.log('blob 2', require('./blob2'))
