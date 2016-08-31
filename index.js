@@ -1,19 +1,14 @@
-var browserify = require('browserify')
-var through = require('through2')
-var concat = require('concat-stream')
+'use strict'
 
-module.exports = function blobify(file, options) {
-  if(file.indexOf('.blob') < 0) return through()
-  var bundle, stream;
-  function onBuffer(buffer, encoding, callback) {
-    bundle.pipe(concat(function blobWrap(blobdata) {
-      var content = '['+JSON.stringify(blobdata.toString())+']'
-      var blob = 'new Blob('+content+', {"type":"application/javascript"});'
-      var exports = new Buffer('module.exports = ' + blob)
-      stream.push(exports)
-      callback()
-    }))
-  }
-  bundle = browserify(file, options).bundle()
-  return (stream = through(onBuffer))
-}
+const through = require('through2');
+
+module.exports = function blobify (file, options) {
+  if (file.slice(-5) !== '.blob') return through();
+  options = options || {};
+
+  return through.obj((data, encoding, cb) => {
+    const content = data.toString('base64');
+    const blob = 'new Blob(["' + content + '"], {"type": "application/javascript"})';
+    cb(null, new Buffer('module.exports = ' + blob));
+  });
+};
