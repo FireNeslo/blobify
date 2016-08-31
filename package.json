@@ -7,8 +7,6 @@
   "author": "Øystein Ø. Olsen <fireneslo@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "browserify": "^11.0.0",
-    "concat-stream": "^1.5.0",
     "through2": "^2.0.0"
   }
 }
