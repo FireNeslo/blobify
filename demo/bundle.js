@@ -1,7 +1,7 @@
 'use strict'
 
 const browserify = require('browserify')
-const blobify = require('blobify')
+const blobify = require('..')
 
 browserify(__dirname + '/index.js')
 .transform(blobify, ['blob1', 'blob2'])
